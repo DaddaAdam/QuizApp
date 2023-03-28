@@ -3,6 +3,7 @@ package com.emsi.QuizApp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         TextView password = (TextView) findViewById(R.id.password);
 
         Button loginBtn = (Button) findViewById(R.id.loginButton);
+
+        TextView toSignUp = (TextView) findViewById(R.id.toRegister);
+
+        toSignUp.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
 
         loginBtn.setOnClickListener(v -> {
             if(!email.getText().toString().isEmpty()
