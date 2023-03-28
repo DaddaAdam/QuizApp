@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
+        <service android:name="com.google.android.gms.measurement.AppMeasurementService" />
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -19,7 +22,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
+
 
 </manifest>
