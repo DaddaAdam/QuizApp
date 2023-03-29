@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
         TextView passwordConfirm = (TextView) findViewById(R.id.password_confirm);
 
         Button loginBtn = (Button) findViewById(R.id.loginButton);
-
         TextView toSignUp = (TextView) findViewById(R.id.toRegister);
 
         toSignUp.setOnClickListener(v -> {
@@ -53,9 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!passwordString.equals(passwordConfirmString)) {
                     Toast.makeText(RegisterActivity.this, "Please make sure both password match",
                             Toast.LENGTH_SHORT).show();
-                } else{
-
-
+                } else {
                     mAuth.createUserWithEmailAndPassword(emailString, passwordString)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -67,13 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         startActivity(intent);
-
                                     } else {
                                         // If sign in fails, display a message to the user.
-
                                         Toast.makeText(RegisterActivity.this, "Registration failed.",
                                                 Toast.LENGTH_SHORT).show();
-
                                     }
                                 }
                             });
