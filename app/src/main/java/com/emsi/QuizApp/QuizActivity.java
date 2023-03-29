@@ -45,6 +45,7 @@ public class QuizActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        //Bind the UI elements to the java code
         questionNumber = (TextView) findViewById(R.id.questionNumber);
         quiz_image = (ImageView) findViewById(R.id.quiz_image);
         questionContent = (TextView) findViewById(R.id.questionContent);
@@ -54,6 +55,8 @@ public class QuizActivity extends AppCompatActivity {
         answer3 = (Button) findViewById(R.id.answer_3);
         answer4 = (Button) findViewById(R.id.answer_4);
 
+
+        //Query the database, get all the documents and parse them
         db.collection("Questions")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -66,6 +69,8 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
+
+        //Add event listener to each button, then use the text to check wether the answer is correct
         answer1.setOnClickListener(v -> {
             ProcessQuestions(answer1.getText().toString());
         });
@@ -81,32 +86,35 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void DisplayQuestion(Map<String, Object> question){
+        //Parse the array of possible answers from the json
         ArrayList<String> answers =  (ArrayList<String>) question.get("answers");
 
-        questionNumber.setText((String)"Question N°"+questionCount+1);
+        //Assign each field from the object to the UI elements
+        questionNumber.setText((String)"Question N°"+ (int)(questionCount+1));
         questionContent.setText((String)question.get("content"));
-        
+
         answer1.setText(answers.get(0));
         answer2.setText(answers.get(1));
         answer3.setText(answers.get(2));
         answer4.setText(answers.get(3));
 
+        //Using picasso, load the image and add it to the ImageView component
         String imageUrl = (String)question.get("imageUrl");
         Picasso.get().load(imageUrl).into(quiz_image);
     }
 
     public void ProcessQuestions(String answer){
-
+        //If the answer is correct, increment score
         if(answer.equals(documents.get(questionCount).getData().get("correct_answer")))
             score++;
 
-        if(questionCount < documents.size())
+        //If the quiz is not over yet, go to next question
+        if(questionCount < documents.size()-1)
             DisplayQuestion(documents.get(++questionCount).getData());
 
+        //Else, go to summary activity and display final score
         else
-            Toast.makeText(QuizActivity.this, "No more questions.",
+            Toast.makeText(QuizActivity.this, "No more questions, score: " + score + "/" + documents.size(),
                     Toast.LENGTH_SHORT).show();
-
     }
-
 }

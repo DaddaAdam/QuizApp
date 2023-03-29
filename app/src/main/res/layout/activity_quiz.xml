@@ -13,7 +13,6 @@
         android:text="Question x:"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-        android:padding="20dp"
         />
 
     <ImageView
@@ -21,9 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/questionNumber"
         android:id="@+id/quiz_image"
-        android:minHeight="600px"
-        android:padding="20dp"
-        android:layout_margin="10dp"
+        android:maxHeight="600px"
+        android:layout_margin="5dp"
         />
     <TextView
         android:layout_width="wrap_content"

@@ -18,30 +18,31 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(this);
-
         setContentView(R.layout.activity_main);
 
+        //Getting the Firebase instance
+        FirebaseApp.initializeApp(this);
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
 
+        //Binding all the UI elements to the Java code
         TextView email = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
 
         Button loginBtn = (Button) findViewById(R.id.loginButton);
-
         TextView toSignUp = (TextView) findViewById(R.id.toRegister);
 
+        //If you don't have an account, redirect to Sign Up activity
         toSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
         loginBtn.setOnClickListener(v -> {
+            //Making sure all the informations have been filled
             if(!email.getText().toString().isEmpty()
                     && !password.getText().toString().isEmpty()) {
 
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+            } else {
+                Toast.makeText(MainActivity.this, "Please make sure to fill all the informations.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

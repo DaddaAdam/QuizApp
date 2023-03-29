@@ -22,12 +22,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.register_layout);
 
+        //Get the Firebase instance
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
 
+        //Bind all the UI elements to the Java code
         TextView email = (TextView) findViewById(R.id.email);
         TextView password = (TextView) findViewById(R.id.password);
         TextView passwordConfirm = (TextView) findViewById(R.id.password_confirm);
@@ -35,20 +36,24 @@ public class RegisterActivity extends AppCompatActivity {
         Button loginBtn = (Button) findViewById(R.id.loginButton);
         TextView toSignUp = (TextView) findViewById(R.id.toRegister);
 
+        //If you already have an account, redirect to Sign In activity
         toSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         loginBtn.setOnClickListener(v -> {
+            //Making sure all the informations have been filled
             if(!email.getText().toString().isEmpty()
                     && !password.getText().toString().isEmpty()
                         && !passwordConfirm.getText().toString().isEmpty()) {
 
+                //Retrieving the informations from the TextViews
                 String emailString = email.getText().toString();
                 String passwordString = password.getText().toString();
                 String passwordConfirmString = passwordConfirm.getText().toString();
 
+                //Making sure both passwords match
                 if (!passwordString.equals(passwordConfirmString)) {
                     Toast.makeText(RegisterActivity.this, "Please make sure both password match",
                             Toast.LENGTH_SHORT).show();
@@ -72,6 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
             }
+            } else {
+                Toast.makeText(RegisterActivity.this, "Please make sure to fill all the informations.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
