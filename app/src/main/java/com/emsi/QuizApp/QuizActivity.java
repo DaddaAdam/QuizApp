@@ -28,6 +28,9 @@ import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
 
+    private static int questionCount=1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,22 @@ public class QuizActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        DocumentReference docRef = db.collection("Questions").document("q1");
+        docRef
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map<String, Object> question = documentSnapshot.getData();
+
+                        if(question != null){
+                            DisplayQuestion(question);
+                    }
+                    }
+                });
+    }
+
+    public void DisplayQuestion(Map<String, Object> question){
         TextView questionNumber = (TextView) findViewById(R.id.questionNumber);
         ImageView quiz_image = (ImageView) findViewById(R.id.quiz_image);
         TextView questionContent = (TextView) findViewById(R.id.questionContent);
@@ -44,31 +63,20 @@ public class QuizActivity extends AppCompatActivity {
         Button answer3 = (Button) findViewById(R.id.answer_3);
         Button answer4 = (Button) findViewById(R.id.answer_4);
 
-        int questionCount=1;
-        DocumentReference docRef = db.collection("Questions").document("q1");
+        questionNumber.setText((String)"Question N°"+questionCount);
+        questionContent.setText((String)question.get("content"));
+        ArrayList<String> answers =  (ArrayList<String>) question.get("answers");
+        answer1.setText(answers.get(0));
+        answer2.setText(answers.get(1));
+        answer3.setText(answers.get(2));
+        answer4.setText(answers.get(3));
 
-        docRef
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Map<String, Object> question = documentSnapshot.getData();
+        String imageUrl = (String)question.get("imageUrl");
+        Picasso.get().load(imageUrl).into(quiz_image);
+    }
 
-                        if(question != null){
+    public void ProcessQuestions(){
 
-                        questionNumber.setText((String)"Question N°"+questionCount);
-                        questionContent.setText((String)question.get("content"));
-                        ArrayList<String> answers =  (ArrayList<String>) question.get("answers");
-                        answer1.setText(answers.get(0));
-                        answer2.setText(answers.get(1));
-                        answer3.setText(answers.get(2));
-                        answer4.setText(answers.get(3));
-
-                        String imageUrl = (String)question.get("imageUrl");
-                        Picasso.get().load(imageUrl).into(quiz_image);
-                    }
-                    }
-                });
     }
 
 }
