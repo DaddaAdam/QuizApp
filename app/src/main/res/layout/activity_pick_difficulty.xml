@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PickDifficultyActivity">
+
+    <ImageView
+        android:id="@id/quiz_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/quiz_logo_foreground"
+        android:minHeight="700px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quiz_logo"
+        android:id="@+id/difficult_title"
+        android:text="Pick the difficulty"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/difficult_title"
+        android:id="@+id/easy_btn"
+        android:text="Easy"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/easy_btn"
+        android:id="@+id/easy_txt"
+        android:text="Recommended for most EMSI students."
+        android:layout_centerHorizontal="true"
+        android:textSize="13dp"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/easy_txt"
+        android:id="@+id/intermediate_btn"
+        android:text="Intermediate"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/intermediate_btn"
+        android:id="@+id/intermediate_txt"
+        android:text="Recommended for people with little to no brain damage."
+        android:layout_centerHorizontal="true"
+        android:textSize="13dp"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/intermediate_txt"
+        android:id="@+id/difficult_btn"
+        android:text="Hard"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/difficult_btn"
+        android:id="@+id/difficult_txt"
+        android:text="Recommended for the elite of this glorious country."
+        android:layout_centerHorizontal="true"
+        android:textSize="13dp"
+        android:layout_margin="10dp"
+        />
+
+</RelativeLayout>

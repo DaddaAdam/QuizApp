@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,7 +62,6 @@ public class QuizActivity extends AppCompatActivity {
         buttonList.add(answer3);
         buttonList.add(answer4);
 
-
         //Query the database, get all the documents and parse them
         db.collection("Questions")
                 .get()
@@ -77,7 +75,7 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-        //Add event listener to each button, then use the text to check wether the answer is correct
+        //Add event listener to each button, then use the text to check whether the answer is correct
         for(Button btn: buttonList){
             btn.setOnClickListener(v -> {
                 ProcessQuestions(btn.getText().toString());
@@ -94,7 +92,7 @@ public class QuizActivity extends AppCompatActivity {
         questionContent.setText((String)question.get("content"));
 
         for(int i=0; i < buttonList.size(); i++){
-            if(i>answers.size() - 1)
+            if(i > answers.size() - 1)
                 buttonList.get(i).setVisibility(View.GONE);
 
             else{
