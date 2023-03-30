@@ -62,8 +62,12 @@ public class QuizActivity extends AppCompatActivity {
         buttonList.add(answer3);
         buttonList.add(answer4);
 
+        Intent intent = getIntent();
+        int difficulty = intent.getIntExtra("difficulty", 1);
+
         //Query the database, get all the documents and parse them
         db.collection("Questions")
+                .whereEqualTo("difficulty", difficulty)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

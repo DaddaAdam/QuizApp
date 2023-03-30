@@ -41,7 +41,7 @@
         android:id="@+id/easy_txt"
         android:text="Recommended for most EMSI students."
         android:layout_centerHorizontal="true"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:layout_margin="10dp"
         />
     <Button
@@ -60,7 +60,7 @@
         android:id="@+id/intermediate_txt"
         android:text="Recommended for people with little to no brain damage."
         android:layout_centerHorizontal="true"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:layout_margin="10dp"
         />
     <Button
@@ -79,7 +79,7 @@
         android:id="@+id/difficult_txt"
         android:text="Recommended for the elite of this glorious country."
         android:layout_centerHorizontal="true"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:layout_margin="10dp"
         />
 

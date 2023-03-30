@@ -27,7 +27,7 @@ public class SummaryActivity extends AppCompatActivity {
         scoreText.setText( score + "/" + questionCount);
 
         playAgain.setOnClickListener(v -> {
-            Intent newIntent = new Intent(SummaryActivity.this, QuizActivity.class);
+            Intent newIntent = new Intent(SummaryActivity.this, PickDifficultyActivity.class);
             startActivity(newIntent);
         });
     }

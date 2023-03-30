@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, "Authentication succeeded.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+
+                                    Intent intent = new Intent(MainActivity.this, PickDifficultyActivity.class);
                                     startActivity(intent);
 
                                 } else {
