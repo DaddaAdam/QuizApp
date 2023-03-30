@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class QuizActivity extends AppCompatActivity {
 
     //UI elements
     Button answer1, answer2, answer3, answer4;
+    ArrayList<Button> buttonList;
     TextView questionNumber, questionContent;
     ImageView quiz_image;
 
@@ -55,6 +57,12 @@ public class QuizActivity extends AppCompatActivity {
         answer3 = (Button) findViewById(R.id.answer_3);
         answer4 = (Button) findViewById(R.id.answer_4);
 
+        buttonList = new ArrayList<Button>();
+        buttonList.add(answer1);
+        buttonList.add(answer2);
+        buttonList.add(answer3);
+        buttonList.add(answer4);
+
 
         //Query the database, get all the documents and parse them
         db.collection("Questions")
@@ -69,20 +77,12 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-
         //Add event listener to each button, then use the text to check wether the answer is correct
-        answer1.setOnClickListener(v -> {
-            ProcessQuestions(answer1.getText().toString());
-        });
-        answer2.setOnClickListener(v -> {
-            ProcessQuestions(answer2.getText().toString());
-        });
-        answer3.setOnClickListener(v -> {
-            ProcessQuestions(answer3.getText().toString());
-        });
-        answer4.setOnClickListener(v -> {
-            ProcessQuestions(answer4.getText().toString());
-        });
+        for(Button btn: buttonList){
+            btn.setOnClickListener(v -> {
+                ProcessQuestions(btn.getText().toString());
+            });
+        }
     }
 
     public void DisplayQuestion(Map<String, Object> question){
@@ -93,10 +93,16 @@ public class QuizActivity extends AppCompatActivity {
         questionNumber.setText((String)"Question N°"+ (int)(questionCount+1));
         questionContent.setText((String)question.get("content"));
 
-        answer1.setText(answers.get(0));
-        answer2.setText(answers.get(1));
-        answer3.setText(answers.get(2));
-        answer4.setText(answers.get(3));
+        for(int i=0; i < buttonList.size(); i++){
+            if(i>answers.size() - 1)
+                buttonList.get(i).setVisibility(View.GONE);
+
+            else{
+                buttonList.get(i).setVisibility(View.VISIBLE);
+                buttonList.get(i).setText(answers.get(i));
+            }
+
+        }
 
         //Using picasso, load the image and add it to the ImageView component
         String imageUrl = (String)question.get("imageUrl");
