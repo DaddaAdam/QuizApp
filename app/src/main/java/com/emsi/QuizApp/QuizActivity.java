@@ -118,8 +118,18 @@ public class QuizActivity extends AppCompatActivity {
             DisplayQuestion(documents.get(++questionCount).getData());
 
         //Else, go to summary activity and display final score
-        else
-            Toast.makeText(QuizActivity.this, "No more questions, score: " + score + "/" + documents.size(),
-                    Toast.LENGTH_SHORT).show();
+        else{
+            Intent intent = new Intent(QuizActivity.this, SummaryActivity.class);
+            intent.putExtra("score", score);
+            intent.putExtra("questionCount", ++questionCount);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        score=0;
+        questionCount=0;
     }
 }
