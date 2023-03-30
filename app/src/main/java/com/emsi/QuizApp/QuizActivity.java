@@ -101,7 +101,6 @@ public class QuizActivity extends AppCompatActivity {
                 buttonList.get(i).setVisibility(View.VISIBLE);
                 buttonList.get(i).setText(answers.get(i));
             }
-
         }
 
         //Using picasso, load the image and add it to the ImageView component
