@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PickDifficultyActivity extends AppCompatActivity {
-
     Button easyBtn, intermediateBtn, hardBtn;
     List<Button> btnList;
 

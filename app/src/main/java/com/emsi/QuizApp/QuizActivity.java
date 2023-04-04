@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
     //Global variables
-    private static int questionCount=0;
-    private static int score = 0;
+    private int questionCount=0;
+    private int score = 0;
 
     //UI elements
     Button answer1, answer2, answer3, answer4;
